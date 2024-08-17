@@ -1,23 +1,73 @@
-[gd_scene format=3 uid="uid://bf4cbqk4bxj3c"]
+[gd_scene load_steps=8 format=3 uid="uid://bf4cbqk4bxj3c"]
+
+[ext_resource type="Texture2D" uid="uid://b8qjtbgweu0fk" path="res://sprites/ryu.png" id="1_2df7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcu8r"]
+size = Vector2(40, 146)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_83ekm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2df7c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bp4t5"]
+size = Vector2(23, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_me2xd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4jcjy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqkbq"]
 
 [node name="Player" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-6, -63)
+shape = SubResource("RectangleShape2D_tcu8r")
+debug_color = Color(0.276937, 0.617444, 0.389387, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(-1, -66)
+scale = Vector2(0.333, 0.322)
+sprite_frames = SubResource("SpriteFrames_83ekm")
 
 [node name="Colliders" type="Node2D" parent="CharacterBody2D"]
 
 [node name="Handcolliders" type="Node2D" parent="CharacterBody2D/Colliders"]
 
-[node name="Left hand" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Handcolliders"]
+[node name="Left hand" type="Area2D" parent="CharacterBody2D/Colliders/Handcolliders"]
 
-[node name="Right hand" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Handcolliders"]
+[node name="Lefthandcoll" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Handcolliders/Left hand"]
+position = Vector2(4, -105)
+shape = SubResource("RectangleShape2D_bp4t5")
+
+[node name="Right hand" type="Area2D" parent="CharacterBody2D/Colliders/Handcolliders"]
+
+[node name="Righthandcoll" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Handcolliders/Right hand"]
+position = Vector2(13, -79)
+shape = SubResource("RectangleShape2D_me2xd")
 
 [node name="Footcolliders" type="Node2D" parent="CharacterBody2D/Colliders"]
+position = Vector2(8, 10)
 
-[node name="Left foot" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Footcolliders"]
+[node name="Left foot" type="Area2D" parent="CharacterBody2D/Colliders/Footcolliders"]
+position = Vector2(-20, -6)
 
-[node name="Right foot" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Footcolliders"]
+[node name="Leftfootcoll" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Footcolliders/Left foot"]
+position = Vector2(-8, -5)
+shape = SubResource("RectangleShape2D_4jcjy")
+
+[node name="Right foot" type="Area2D" parent="CharacterBody2D/Colliders/Footcolliders"]
+position = Vector2(23, 2)
+
+[node name="Rightfootcoll" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Footcolliders/Right foot"]
+position = Vector2(-10, -11)
+shape = SubResource("RectangleShape2D_qqkbq")
