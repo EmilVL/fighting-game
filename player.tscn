@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bf4cbqk4bxj3c"]
+
+[node name="Player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+
+[node name="Colliders" type="Node2D" parent="CharacterBody2D"]
+
+[node name="Handcolliders" type="Node2D" parent="CharacterBody2D/Colliders"]
+
+[node name="Left hand" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Handcolliders"]
+
+[node name="Right hand" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Handcolliders"]
+
+[node name="Footcolliders" type="Node2D" parent="CharacterBody2D/Colliders"]
+
+[node name="Left foot" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Footcolliders"]
+
+[node name="Right foot" type="CollisionShape2D" parent="CharacterBody2D/Colliders/Footcolliders"]
