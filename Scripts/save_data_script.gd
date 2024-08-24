@@ -18,13 +18,13 @@ func AddUser():
 	print(playerSheet)
 
 func LoadPlayerSheet():
-	var file = FileAccess.open("res://data/player_sheet.json", FileAccess.READ)
+	var file = FileAccess.open("res://JSON_files/player_sheet.json", FileAccess.READ)
 	var readData = file.get_as_text()
 	playerSheet = JSON.parse_string(readData)
 	return playerSheet
 	
 func SavePlayerSheet():
-	var file = FileAccess.open("res://data/player_sheet.json", FileAccess.WRITE)
+	var file = FileAccess.open("res://JSON_files/player_sheet.json", FileAccess.WRITE)
 	var writeData = JSON.stringify(playerSheet)
 	file.store_string(writeData)
 	file = null
