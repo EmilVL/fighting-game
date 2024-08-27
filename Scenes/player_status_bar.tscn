@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cscnxgfy14lab"]
+
+[ext_resource type="Texture2D" uid="uid://bvw0mn71klprf" path="res://sprites/healthbar.png" id="1_q4c2e"]
+[ext_resource type="Script" path="res://Scripts/healthbar.gd" id="2_c5rca"]
+
+[node name="PlayerStatusBar" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 83.0
+offset_bottom = 40.0
+text = "Navn
+"
+
+[node name="Health" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 25)
+scale = Vector2(2, 2)
+texture = ExtResource("1_q4c2e")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 32)
+script = ExtResource("2_c5rca")
+
+[node name="NoHealth" type="Sprite2D" parent="."]
+position = Vector2(0, 25)
+scale = Vector2(2, 2)
+texture = ExtResource("1_q4c2e")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 32, 64, 32)
