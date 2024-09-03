@@ -5,12 +5,13 @@ var characterSheet = {}
 var playerName = ""
 var run = true
 
-func AddUser():
-	characterSheet["name"] = "Christoffer"
-	characterSheet["hitpoints"] = ""
-	characterSheet["baseattack"] = ""
-	characterSheet["baseblock"] = ""
-	characterSheet["abilities"] = {"ability1": {"effect": "", "cooldown": ""}, "ability2": {"effect": "", "cooldown": ""}, "ability3": {"effect": "", "cooldown": ""}, "ability4": {"effect": "", "cooldown": ""}}
+func AddUser(name, hitpoints, baseattack, baseblock, abilities):
+	characterSheet["name"] = name
+	characterSheet["hitpoints"] = hitpoints
+	characterSheet["baseattack"] = baseattack
+	characterSheet["baseblock"] = baseblock
+	characterSheet["abilities"] = abilities
+	#{"ability1": {"effect": "", "cooldown": ""}, "ability2": {"effect": "", "cooldown": ""}, "ability3": {"effect": "", "cooldown": ""}, "ability4": {"effect": "", "cooldown": ""}}
 
 	playerName = ""
 	playerSheet[playerName] = characterSheet
@@ -30,7 +31,7 @@ func SavePlayerSheet():
 	file = null
 
 func _ready():
-	AddUser()
+	AddUser("Template", "100", "5", "0.5", {"ability1": {"effect": "", "cooldown": ""}, "ability2": {"effect": "", "cooldown": ""}, "ability3": {"effect": "", "cooldown": ""}, "ability4": {"effect": "", "cooldown": ""}}) #{"ability1": {"effect": "", "cooldown": ""}, "ability2": {"effect": "", "cooldown": ""}, "ability3": {"effect": "", "cooldown": ""}, "ability4": {"effect": "", "cooldown": ""}}
 	SavePlayerSheet()
 	#LoadPlayerSheet()
 	#print(playerSheet[playerName]["name"])
