@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -600.0
+const JUMP_VELOCITY = -858.0
 const COYOTE_TIME = 0.2
 const JUMP_BUFFER_TIME = 0.2
 const MAX_ROTATION_ANGLE = 0.05
@@ -28,7 +28,7 @@ func _ready():
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y += gravity*2 * delta
 		time_since_last_grounded += delta
 	else:
 		time_since_last_grounded = 0.0
