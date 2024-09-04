@@ -26,6 +26,7 @@ scale = Vector2(1.03457, 1.03457)
 script = ExtResource("3_jb2b1")
 
 [node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
 scale = Vector2(6.04418, 5.82504)
 tile_set = SubResource("TileSet_kmx86")
 collision_visibility_mode = 1
