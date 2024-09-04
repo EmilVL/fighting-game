@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccmihlhw4kpsh"]
+[gd_scene load_steps=7 format=3 uid="uid://ccmihlhw4kpsh"]
 
 [ext_resource type="Script" path="res://Scripts/save_data_script.gd" id="1_4qhvj"]
+[ext_resource type="PackedScene" uid="uid://c6fknjuhl5gaf" path="res://character_body_2d.tscn" id="2_55quo"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="3_jb2b1"]
+[ext_resource type="Texture2D" uid="uid://6og7gh47pm1k" path="res://GrassBlock.png" id="4_vh8c1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l78g4"]
+texture = ExtResource("4_vh8c1")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_kmx86"]
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_l78g4")
 
 [node name="SaveData" type="Node"]
 script = ExtResource("1_4qhvj")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_55quo")]
+position = Vector2(307, 331)
+script = ExtResource("3_jb2b1")
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(6.04418, 5.82504)
+tile_set = SubResource("TileSet_kmx86")
+format = 2
+layer_0/tile_data = PackedInt32Array(393216, 2, 0, 393217, 2, 0, 393218, 2, 0, 393219, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0)

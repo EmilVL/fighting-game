@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccmihlhw4kpsh"]
+
+[ext_resource type="Script" path="res://Scripts/save_data_script.gd" id="1_4qhvj"]
+[ext_resource type="Script" path="res://Scenes/World.gd" id="2_af8em"]
+
+[node name="SaveData" type="Node"]
+script = ExtResource("1_4qhvj")
+
+[node name="World" type="Node" parent="."]
+script = ExtResource("2_af8em")

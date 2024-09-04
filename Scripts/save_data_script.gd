@@ -5,8 +5,8 @@ var characterSheet = {}
 var playerName = ""
 var run = true
 
-func AddUser(name, hitpoints, baseattack, baseblock, abilities):
-	characterSheet["name"] = name
+func AddUser(chrname, hitpoints, baseattack, baseblock, abilities):
+	characterSheet["name"] = chrname
 	characterSheet["hitpoints"] = hitpoints
 	characterSheet["baseattack"] = baseattack
 	characterSheet["baseblock"] = baseblock
