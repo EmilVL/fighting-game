@@ -3,14 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://b8qjtbgweu0fk" path="res://sprites/ryu.png" id="1_m2ytl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bap3p"]
-radius = 27.792
-height = 92.6399
+radius = 39.853
+height = 209.984
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.99999, 0.999992)
-scale = Vector2(0.215, 0.215)
+position = Vector2(-1.14441e-05, 1.99999)
+scale = Vector2(0.4555, 0.4555)
 texture = ExtResource("1_m2ytl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
