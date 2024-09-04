@@ -10,7 +10,8 @@ texture = ExtResource("4_vh8c1")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.5, 0, -2.5, -8, -2.5)
+0:0/0/physics_layer_0/polygon_0/one_way = true
 
 [sub_resource type="TileSet" id="TileSet_kmx86"]
 physics_layer_0/collision_layer = 1
@@ -20,11 +21,13 @@ sources/2 = SubResource("TileSetAtlasSource_l78g4")
 script = ExtResource("1_4qhvj")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_55quo")]
-position = Vector2(307, 331)
+position = Vector2(142, 504)
+scale = Vector2(1.03457, 1.03457)
 script = ExtResource("3_jb2b1")
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(6.04418, 5.82504)
 tile_set = SubResource("TileSet_kmx86")
+collision_visibility_mode = 1
 format = 2
-layer_0/tile_data = PackedInt32Array(393216, 2, 0, 393217, 2, 0, 393218, 2, 0, 393219, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0)
+layer_0/tile_data = PackedInt32Array(393216, 2, 0, 393217, 2, 0, 393218, 2, 0, 393219, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0, 393224, 2, 0, 393225, 2, 0, 393226, 2, 0, 393227, 2, 0, 262153, 2, 0, 262145, 2, 0, 196614, 2, 0, 65540, 2, 0)
