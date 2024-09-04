@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6og7gh47pm1k"
-path="res://.godot/imported/GrassBlock.png-f59ee2188d9d6b2f129ec8f831c7672d.ctex"
+uid="uid://do2btwarxrt2j"
+path="res://.godot/imported/Yuji_run-Sheet.png-57288a6d73617dad83a476c88b391e7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GrassBlock.png"
-dest_files=["res://.godot/imported/GrassBlock.png-f59ee2188d9d6b2f129ec8f831c7672d.ctex"]
+source_file="res://sprites/Yuji_run-Sheet.png"
+dest_files=["res://.godot/imported/Yuji_run-Sheet.png-57288a6d73617dad83a476c88b391e7c.ctex"]
 
 [params]
 

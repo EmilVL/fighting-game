@@ -15,6 +15,14 @@ run/main_scene="res://Scenes/save_data.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1158
+window/size/mode=2
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=0
+
 [input]
 
 ui_punch={
