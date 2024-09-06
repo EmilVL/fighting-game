@@ -1,4 +1,15 @@
 extends CharacterBody2D
+#Player 2
+
+enum State {
+	idle,
+	run,
+	jump,
+	fall,
+	ability1
+}
+
+var current_state = State.idle
 
 var SPEED = 300.0
 var JUMP_VELOCITY = -858.0
@@ -31,7 +42,7 @@ func _physics_process(delta):
 		velocity.y += gravity * 2 * delta
 		time_since_last_grounded += delta			
 		if not isAttacking and velocity.y > 0 and sprite.animation != "fall":
-			sprite.play("fall")
+			current_state = State.fall
 		
 	else:
 		time_since_last_grounded = 0.0
@@ -51,27 +62,27 @@ func _physics_process(delta):
 			hasJumped = true
 			velocity.y = JUMP_VELOCITY
 			if not isAttacking and velocity.y < 0 and not sprite.is_playing() or sprite.animation != "jump":
-				sprite.play("jump")
+				current_state = State.jump
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("ui_left", "ui_right")
 
-	if direction != 0:
+	if direction != 0 and not isAttacking:
 		velocity.x = move_toward(velocity.x, direction * SPEED, ACCELERATION * delta)
 		
 		# Flip the sprite based on the direction
 		sprite.scale.x = sign(direction) * abs(sprite.scale.x)
 		
 		# Play the running animation if moving horizontally
-		if not isAttacking and is_on_floor() and not sprite.is_playing() or sprite.animation != "run" and velocity.y == 0:
-			sprite.play("run")
+		if is_on_floor() and not sprite.is_playing() or sprite.animation != "run" and velocity.y == 0:
+			current_state = State.run
 	else:
 		# Decelerate toward zero
 		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta)
 
 		# Play the idle animation if not moving horizontally
 		if not isAttacking and is_on_floor() and (not sprite.is_playing() or sprite.animation != "idle") or sprite.animation != "attack":
-			sprite.play("idle")
+			current_state = State.idle
 
 	# Rotate the sprite slightly based on the velocity
 	sprite.rotation = clamp(velocity.x / SPEED * MAX_ROTATION_ANGLE, -MAX_ROTATION_ANGLE, MAX_ROTATION_ANGLE)
@@ -80,11 +91,26 @@ func _physics_process(delta):
 		perform_attack()
 
 	move_and_slide()
+	
+	match current_state:
+		State.idle:
+			sprite.play("idle")
+		State.run:
+			sprite.play("run")
+		State.jump:
+			sprite.play("jump")
+		State.fall:
+			sprite.play("fall")
+		State.ability1:
+			if (not sprite.is_playing() or sprite.animation != "attack"):
+				sprite.play("attack")
+			
 
 # Inside perform_attack()
 var attackDebounce = false
 var attackTime = 0.4
 var attackCooldown = 0
+var maxCombo = 5
 func perform_attack():
 	if attackDebounce == true: return
 	isAttacking = true
@@ -93,11 +119,10 @@ func perform_attack():
 	SPEED = 0.1
 	combo += 1
 	attackCooldown = 0
-	if combo > 3:
+	if combo > maxCombo:
 		attackCooldown = 1
 		combo = 1
-	if (not sprite.is_playing() or sprite.animation != "attack"):
-		sprite.play("attack")
+	current_state = State.ability1
 	
 	# Enable hitbox
 	#$AttackHitbox.set_deferred("monitoring", true)

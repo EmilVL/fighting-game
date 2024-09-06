@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3 uid="uid://ccmihlhw4kpsh"]
+
+[ext_resource type="Script" path="res://Scripts/save_data_script.gd" id="1_4qhvj"]
+[ext_resource type="PackedScene" uid="uid://c6fknjuhl5gaf" path="res://character_body_2d.tscn" id="2_55quo"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="3_jb2b1"]
+[ext_resource type="Texture2D" uid="uid://d1i7hsn7xn4m0" path="res://sprites/Tileset.png" id="4_rfba8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l78g4"]
+texture = ExtResource("4_rfba8")
+0:0/0 = 0
+0:0/0/z_index = -1
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_kmx86"]
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_l78g4")
+
+[sub_resource type="GDScript" id="GDScript_h2b5j"]
+script/source = "extends CharacterBody2D
+
+enum State {
+	idle,
+	run,
+	jump,
+	fall,
+	ability1
+}
+
+var current_state = State.idle
+
+var SPEED = 300.0
+var JUMP_VELOCITY = -858.0
+const COYOTE_TIME = 0.2
+const JUMP_BUFFER_TIME = 0.2
+var MAX_ROTATION_ANGLE = 0.05
+var ACCELERATION = 4200.0
+var DECELERATION = 4200.0
+
+var hasJumped = false
+var isAttacking = false
+
+# Reference to the AnimatedSprite2D node
+var sprite: AnimatedSprite2D
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+
+var time_since_last_grounded = 0.0
+var time_since_jump_pressed = JUMP_BUFFER_TIME
+var combo = 0
+
+func _ready():
+	# Get the AnimatedSprite2D node
+	sprite = $AnimatedSprite2D
+
+func _physics_process(delta):
+	velocity.x = -1
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * 2 * delta
+		time_since_last_grounded += delta
+		if not isAttacking and velocity.y > 0 and sprite.animation != \"fall\":
+			current_state = State.fall
+
+		# Decelerate toward zero
+	velocity.x = move_toward(velocity.x, 0, DECELERATION * delta)
+
+	# Play the idle animation if not moving horizontally
+	if not isAttacking and is_on_floor() and (not sprite.is_playing() or sprite.animation != \"idle\") or sprite.animation != \"attack\":
+		current_state = State.idle
+
+	# Rotate the sprite slightly based on the velocity
+	sprite.rotation = clamp(velocity.x / SPEED * MAX_ROTATION_ANGLE, -MAX_ROTATION_ANGLE, MAX_ROTATION_ANGLE)
+	
+	move_and_slide()
+	
+	match current_state:
+		State.idle:
+			sprite.play(\"idle\")
+		State.run:
+			sprite.play(\"run\")
+		State.jump:
+			sprite.play(\"jump\")
+		State.fall:
+			sprite.play(\"fall\")
+"
+
+[node name="SaveData" type="Node"]
+script = ExtResource("1_4qhvj")
+
+[node name="Player" parent="." instance=ExtResource("2_55quo")]
+position = Vector2(58.3534, 430.6)
+scale = Vector2(1.03457, 1.03457)
+script = ExtResource("3_jb2b1")
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+position = Vector2(0.353439, -1.39968)
+scale = Vector2(3.79846, 4.06409)
+tile_set = SubResource("TileSet_kmx86")
+format = 2
+layer_0/tile_data = PackedInt32Array(327679, 65538, 0, 262143, 65538, 0, 196607, 65538, 0, 131071, 65538, 0, 65535, 65538, 0, -65524, 65538, 0, -65525, 65538, 0, -65526, 65538, 0, -65527, 65538, 0, -65528, 65538, 0, -65529, 65538, 0, -65530, 65538, 0, -65531, 65538, 0, -65532, 65538, 0, -65533, 65538, 0, -65534, 65538, 0, -65535, 65538, 0, -65536, 65538, 0, -1, 65538, 0, 393215, 65538, 0, 458751, 65538, 0, 524287, 65538, 0, 589823, 65538, 0, 655359, 65538, 0, 720895, 65538, 0, -65523, 65538, 0, -65522, 65538, 0, -65521, 65538, 0, -65520, 65538, 0, -65519, 65538, 0, -65518, 65538, 0, -65517, 65538, 0, 19, 65538, 0, 65555, 65538, 0, 131091, 65538, 0, 196627, 65538, 0, 262163, 65538, 0, 327699, 65538, 0, 393235, 65538, 0, 458771, 65538, 0, 524307, 65538, 0, 589843, 65538, 0, 655379, 65538, 0, 655378, 2, 1, 655377, 2, 1, 655376, 2, 1, 655375, 2, 1, 655374, 2, 1, 655373, 2, 1, 655372, 2, 1, 655371, 2, 1, 655370, 2, 1, 655369, 2, 1, 655368, 2, 1, 655367, 2, 1, 655366, 2, 1, 655365, 2, 1, 655364, 2, 1, 655363, 2, 1, 655362, 2, 1, 655361, 2, 1, 655360, 2, 1, 589824, 2, 0, 589825, 2, 0, 589826, 2, 0, 589827, 2, 0, 589828, 2, 0, 589829, 2, 0, 589830, 2, 0, 589831, 2, 0, 589832, 2, 0, 589833, 2, 0, 589834, 2, 0, 589835, 2, 0, 589836, 2, 0, 589837, 2, 0, 589838, 2, 0, 589839, 2, 1, 524303, 2, 0, 524304, 2, 0, 524305, 2, 0, 589841, 2, 1, 589842, 2, 0, 589840, 2, 1, 720905, 2, 1, 720904, 2, 1, 720903, 2, 1, 720902, 2, 1, 720901, 2, 1, 720900, 2, 1, 720906, 2, 1, 720907, 2, 1, 720908, 2, 1, 720909, 2, 1, 720910, 2, 1, 720911, 2, 1, 720912, 2, 1, 720913, 2, 1, 720914, 2, 1, 720899, 2, 1, 720898, 2, 1, 720897, 2, 1, 720896, 2, 1, 786431, 65538, 0, 720915, 65538, 0)
+
+[node name="Enemy" parent="." instance=ExtResource("2_55quo")]
+position = Vector2(970, 383)
+script = SubResource("GDScript_h2b5j")
